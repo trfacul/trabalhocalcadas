@@ -1,0 +1,65 @@
+body
+{
+    background-color: LightSteelBlue;
+}
+label
+{
+	 text-align: left; 
+         font-weight: bold;
+}
+
+
+.marg
+{
+padding-top:30px;
+}
+.negrito::first-line
+{	
+	font-weight: bold;
+}
+
+#inputmatri
+{
+	text-align: right;
+} 
+#inputn
+{
+	text-align: right;
+} 
+#txtcep
+{
+	text-align: right;
+} 
+#inputcard
+{
+	text-align: right;
+} 
+#inputcod
+{
+	text-align: right;
+} 
+span
+{
+  color:red;
+} 
+#bordar
+{
+
+border:1px solid black;
+}
+		thead
+		{
+			font-size:20px; 
+			font-weight: bold;
+			text-align: left;
+		}
+		tfoot
+		{
+		  font-weight: bold;
+		  color:red;
+		}
+		   td
+			{
+			 text-align: left;
+			}
+}
