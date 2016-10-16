@@ -1,4 +1,4 @@
-<?
+<?php
 
 $host="127.0.0.1"; // Host name 
 $username="root"; // Mysql username 
@@ -6,19 +6,21 @@ $password=""; // Mysql password
 $db_name="dados_usuarios"; // Database name 
 $mysqli = new mysqli('localhost', 'root', '', 'dados_usuarios');
 
-if((strlen($email_login) == 0) && (strlen($password_login) == 0) ){
-		$valida = false;
-        print("<a href='index.html'>Os campos email e senha sao obrigatorios. CLICK na mensagem para voltar.</a> ");
-}
- if((strlen($email_login) <> "") && (strlen($password_login) <> "") ){	
- 		$valida = false;
-         print("<a href='index.html'> Os campos email e senha sao obrigatorios. CLICK na mensagem para voltar.</a> ");
+$email_login = $_POST['email'];
+$password_login = $_POST['password'];
+
+if(((strlen($email_login) == 0) && (strlen($password_login) == 0)) ){
+        print("<a href='index.html'> Os campos email e senha sao obrigatorios. CLICK na mensagem para voltar.</a> ");
+$valida = false;
 }
 
-	if ($valida === false) {
+if (((strlen($email_login) <> "") && (strlen($password_login) <> ""))){
+         print("<a href='index.html'> Os campos email e senha sao obrigatorios. CLICK na mensagem para voltar.</a> ");
+$valida = false;
+}
+if($valida === false) {
     echo "Error";
 }
-
 
 // conecta ao banco de dados
 $con = mysql_pconnect($host, $username, $password) or trigger_error(mysql_error(),E_USER_ERROR); 
