@@ -3,14 +3,15 @@
 $host="127.0.0.1"; // Host name 
 $username="root"; // Mysql username 
 $password=""; // Mysql password 
-$db_name="dados_usuarios"; // Database name 
-$mysqli = new mysqli('localhost', 'root', '', 'dados_usuarios');
+$db_name="calcadas_db"; // Database name 
+$con = mysqli_connect($host, $username, $password, $db_name); 
 
+$user;
 $email_login = $_POST['email'];
-$password_login = $_POST['password'];
+$password_login = $_POST['pass'];
 
-if(((strlen($email_login) == 0) && (strlen($password_login) == 0)) ){
-        print("<a href='index.html'> Os campos email e senha sao obrigatorios. CLICK na mensagem para voltar.</a> ");
+if(((strlen($email_login) == '') && (strlen($password_login) == '')) ){
+        header('Location: index.html');
 $valida = false;
 }
 
@@ -18,21 +19,34 @@ if (((strlen($email_login) <> "") && (strlen($password_login) <> ""))){
          print("<a href='index.html'> Os campos email e senha sao obrigatorios. CLICK na mensagem para voltar.</a> ");
 $valida = false;
 }
-if($valida === false) {
+if($valida == false) {
     echo "Error";
 }
 
 // conecta ao banco de dados
-$con = mysql_pconnect($host, $username, $password) or trigger_error(mysql_error(),E_USER_ERROR); 
+
 // seleciona a base de dados em que vamos trabalhar
-mysql_select_db($db_name, $con);
 // cria a instrução SQL que vai selecionar os dados
-$query = sprintf("SELECT email, senha FROM dados_usuarios");
+$query = sprintf("SELECT * FROM `dados_usuarios` WHERE email=\"$email_login\" AND senha=\"$password_login\"AND nome=\"$user\"");
+
+//SELECT * FROM `dados_usuarios` WHERE email="$email_login" AND senha="$password_login";
 // executa a query
-$dados = mysql_query($query, $con) or die(mysql_error());
+$dados = mysqli_query($con, $query);
+if ($dados == false) {
+	
+		echo mysqli_error($con);
+		
+	}
 // transforma os dados em um array
-$linha = mysql_fetch_assoc($dados);
+$linha = mysqli_fetch_assoc($dados);
 // calcula quantos dados retornaram
-$total = mysql_num_rows($dados);
+$total = mysqli_num_rows($dados);
+
+session_start () ;
+if ( isset ( $_SESSION [' email ']) ) {
+echo " Olá  voce logou" . $_SESSION [' email '];
+}
+
+header('Location:acesso_interno.php');
 ?>
 
